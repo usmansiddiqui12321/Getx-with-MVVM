@@ -4,6 +4,8 @@ import 'package:getxwithmvvm/res/Colors/AppColors.dart';
 import 'package:getxwithmvvm/view_model/Services/Splash_Services.dart';
 import 'package:lottie/lottie.dart';
 
+import '../view_model/Controller/UserPreference/user_preference_View_Model.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
   @override
@@ -12,6 +14,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SplashServices splashServices = SplashServices();
+  UserPreference userPreference = UserPreference();
+
   @override
   void initState() {
     super.initState();
@@ -28,12 +32,14 @@ class _SplashScreenState extends State<SplashScreen> {
               frameRate: FrameRate.max),
           const SizedBox(height: 20),
           Center(
-            child: Text(
-              "Welcome_Back".tr,
-              style: const TextStyle(color: Colors.white),
-              textAlign: TextAlign.center,
-              textScaleFactor: 3,
-            ),
+            child: splashServices.islogin
+                ? Text(
+                    "Welcome_Back".tr,
+                    style: const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    textScaleFactor: 3,
+                  )
+                : null,
           ),
         ],
       ),

@@ -20,8 +20,15 @@ class Utils {
   }
 
   static snackBar(
-      String title, String message, Color backgroundColor, Color textColor) {
+    String title,
+    String message,
+    Color backgroundColor,
+    Color textColor,
+    SnackPosition position,
+  ) {
     Get.snackbar(title, message,
-        backgroundColor: backgroundColor, colorText: textColor);
+        snackPosition: position,
+        backgroundColor: backgroundColor,
+        colorText: textColor);
   }
 }

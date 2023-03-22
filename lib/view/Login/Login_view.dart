@@ -29,8 +29,8 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-          title: Text(
-            'login'.tr,
+          title: const Text(
+            'Login Page',
             textScaleFactor: 1.4,
           ),
           centerTitle: true,
@@ -54,11 +54,29 @@ class _LoginViewState extends State<LoginView> {
                         TextFormField(
                           enabled: true,
                           decoration: InputDecoration(
-                              hintText: 'email_hint'.tr,
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(12))),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.primaryColor),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                            ),
+                            hintText: 'email_hint'.tr,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey
+                                      : Colors.black),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey
+                                      : Colors.black),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                           controller: loginVM.emailController.value,
                           focusNode: loginVM.emailFocusNode.value,
                           onFieldSubmitted: (value) {
@@ -70,13 +88,32 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          obscureText: true,
                           enabled: true,
                           decoration: InputDecoration(
-                              hintText: 'password_hint'.tr,
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(12))),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.primaryColor),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                            ),
+                            hintText: 'password_hint'.tr,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey
+                                      : Colors.black),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Get.isDarkMode
+                                      ? Colors.grey
+                                      : Colors.black),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                           controller: loginVM.passwordController.value,
                           focusNode: loginVM.passwordFocusNode.value,
                           onFieldSubmitted: (value) {},
@@ -114,10 +151,11 @@ class _LoginViewState extends State<LoginView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Don\'t have an account?',
                     textScaleFactor: 1.2,
-                    style: TextStyle(color: AppColors.primaryColor),
+                    style: TextStyle(
+                        color: Get.isDarkMode ? Colors.white : Colors.black),
                   ),
                   TextButton(
                     onPressed: () {},
