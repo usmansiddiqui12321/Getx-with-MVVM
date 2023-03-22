@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxwithmvvm/Utils/Utils.dart';
+import 'package:getxwithmvvm/res/Colors/AppColors.dart';
 import 'package:getxwithmvvm/res/Components/RoundButton.dart';
 import 'package:getxwithmvvm/view_model/Controller/login/loginView_model.dart';
 
@@ -28,7 +29,10 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-          title: Text('login'.tr),
+          title: Text(
+            'login'.tr,
+            textScaleFactor: 1.4,
+          ),
           centerTitle: true,
           automaticallyImplyLeading: false),
       body: SingleChildScrollView(
@@ -75,17 +79,6 @@ class _LoginViewState extends State<LoginView> {
                                   borderRadius: BorderRadius.circular(12))),
                           controller: loginVM.passwordController.value,
                           focusNode: loginVM.passwordFocusNode.value,
-                          // validator: (value) {
-                          //   if (value!.isEmpty) {
-                          //     Get.isSnackbarOpen
-                          //         ? null
-                          //         : Utils.snackBar(
-                          //             "Password",
-                          //             'Please Enter Password🚀',
-                          //             AppColors.secondaryButtonColor,
-                          //             AppColors.whiteColor);
-                          //   }
-                          // },
                           onFieldSubmitted: (value) {},
                         ),
                       ],
@@ -93,7 +86,17 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 2),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Forgot password?',
+                    style: TextStyle(color: AppColors.primaryColor),
+                  ),
+                ),
+              ),
               Obx(
                 () {
                   return RoundButton(
@@ -106,6 +109,26 @@ class _LoginViewState extends State<LoginView> {
                       },
                       title: "Login");
                 },
+              ),
+              const SizedBox(height: 12.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Don\'t have an account?',
+                    textScaleFactor: 1.2,
+                    style: TextStyle(color: AppColors.primaryColor),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Sign up',
+                      style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
