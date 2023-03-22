@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           LottieBuilder.asset("animations/rocket.json",
               frameRate: FrameRate.max),
+          const SizedBox(height: 20),
           Center(
             child: Text(
               "Welcome_Back".tr,
