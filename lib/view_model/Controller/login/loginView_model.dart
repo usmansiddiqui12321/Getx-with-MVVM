@@ -32,26 +32,30 @@ class LoginViewModel extends GetxController {
     };
     _api.loginApi(data).then((value) {
       loading.value = false;
-      if (value['error'] == 'User not found') {
-        Utils.snackBar('Login', value['error'], Colors.red, Colors.white,
-            SnackPosition.TOP);
+      if (value['error'] == 'user not found') {
+        Utils.snackBar(
+          'Login',
+          value['error'],
+          Colors.red,
+          Colors.white,
+          SnackPosition.TOP,
+        );
       } else {
         userPreference.saveUser(UserModel.fromJson(value)).then((value) {
           Get.toNamed(RoutesName.homepage);
           if (kDebugMode) {
-            print(userPreference);
+            print(userPreference.toString());
           }
+          Get.snackbar("Login", "login Successfull",
+              margin: const EdgeInsets.only(bottom: 10),
+              colorText: AppColors.whiteColor,
+              backgroundColor: const Color(0xff4BB543),
+              snackPosition: SnackPosition.BOTTOM,
+              animationDuration: const Duration(seconds: 2));
         }).onError((error, stackTrace) {});
-        Get.snackbar("Login", "login Successfull",
-            margin: const EdgeInsets.only(bottom: 10),
-            colorText: AppColors.whiteColor,
-            backgroundColor: const Color(0xff4BB543),
-            snackPosition: SnackPosition.BOTTOM,
-            animationDuration: const Duration(seconds: 2));
       }
     }).onError((error, stackTrace) {
       loading.value = false;
-
       Utils.snackBar('error', error.toString(), Colors.red, Colors.white,
           SnackPosition.TOP);
     });

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:getxwithmvvm/Utils/Utils.dart';
 import 'package:getxwithmvvm/res/Colors/AppColors.dart';
 import 'package:getxwithmvvm/res/Components/RoundButton.dart';
+import 'package:getxwithmvvm/view_model/Controller/UserPreference/user_preference_View_Model.dart';
 import 'package:getxwithmvvm/view_model/Controller/login/loginView_model.dart';
 
 class LoginView extends StatefulWidget {
@@ -14,6 +15,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final loginVM = Get.put(LoginViewModel());
+  UserPreference userPreference = UserPreference();
   final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
@@ -79,6 +81,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           controller: loginVM.emailController.value,
                           focusNode: loginVM.emailFocusNode.value,
+                          validator: (value) {},
                           onFieldSubmitted: (value) {
                             Utils.fieldFocusChange(
                                 context,
@@ -117,6 +120,11 @@ class _LoginViewState extends State<LoginView> {
                           controller: loginVM.passwordController.value,
                           focusNode: loginVM.passwordFocusNode.value,
                           onFieldSubmitted: (value) {},
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              print("Error");
+                            }
+                          },
                         ),
                       ],
                     ),

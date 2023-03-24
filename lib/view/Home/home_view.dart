@@ -50,7 +50,107 @@ class _HomePageState extends State<HomePage> {
           automaticallyImplyLeading: false,
           title: const Text("HomePage", textScaleFactor: 1.4),
           centerTitle: true,
-          actions: [LogoutButton(userPreference: userPreference)],
+          actions: [
+            InkWell(
+              onTap: () {
+                Get.defaultDialog(
+                  barrierDismissible: false,
+                  title: "Logout",
+                  content: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 24),
+                    decoration: BoxDecoration(
+                      color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        SizedBox(height: 16),
+                        Icon(
+                          Icons.exit_to_app,
+                          size: 48,
+                          color: AppColors.primaryColor,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "Are you sure you want to log out?",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "You will be redirected to the login screen",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  confirm: ElevatedButton(
+                    onPressed: () {
+                      userPreference.removeUser().then(
+                        (value) {
+                          Get.toNamed(RoutesName.loginView);
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.primaryColor,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 32),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      "YES, LOG ME OUT",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  cancel: TextButton(
+                    onPressed: () {
+                      // Close the dialog without logging out
+                      Get.back();
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 32),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(
+                          color: Colors.grey[600]!,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      "CANCEL",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 18.0),
+                child: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
         ),
         body: Obx(
           () {
@@ -144,115 +244,6 @@ class _HomePageState extends State<HomePage> {
                 );
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class LogoutButton extends StatelessWidget {
-  const LogoutButton({
-    super.key,
-    required this.userPreference,
-  });
-
-  final UserPreference userPreference;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Get.defaultDialog(
-          barrierDismissible: false,
-          title: "Logout",
-          content: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            decoration: BoxDecoration(
-              color: Get.isDarkMode ? Colors.grey[800] : Colors.white,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                SizedBox(height: 16),
-                Icon(
-                  Icons.exit_to_app,
-                  size: 48,
-                  color: AppColors.primaryColor,
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Are you sure you want to log out?",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "You will be redirected to the login screen",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          confirm: ElevatedButton(
-            onPressed: () {
-              userPreference.removeUser().then(
-                (value) {
-                  Get.toNamed(RoutesName.loginView);
-                },
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              primary: AppColors.primaryColor,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              "YES, LOG ME OUT",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          cancel: TextButton(
-            onPressed: () {
-              // Close the dialog without logging out
-              Get.back();
-            },
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(
-                  color: Colors.grey[600]!,
-                ),
-              ),
-            ),
-            child: Text(
-              "CANCEL",
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        );
-      },
-      child: const Padding(
-        padding: EdgeInsets.only(right: 18.0),
-        child: Icon(
-          Icons.logout,
-          color: Colors.white,
         ),
       ),
     );
